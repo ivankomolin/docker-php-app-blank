@@ -8,7 +8,7 @@ Requirements:
 
 Run these commands in an empty working directory
 ```
-$ git clone git@github.com:ivankomolin/docker-php-app-blank.git ./
+$ git clone https://github.com/ivankomolin/docker-php-app-blank ./
 $ make install
 ```
 
