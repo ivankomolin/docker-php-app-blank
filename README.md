@@ -13,9 +13,9 @@ $ make install
 ```
 
 After installation are available web applications:  
- - [http://127.0.0.1:8020](http://127.0.0.1:9001) - App
- - [http://127.0.0.1:8021](http://127.0.0.1:9002) - Mysql client for developer
- - [http://127.0.0.1:8010](http://127.0.0.1:9003) - Redis client for developer
+ - [http://127.0.0.1:9001](http://127.0.0.1:9001) - App
+ - [http://127.0.0.1:9002](http://127.0.0.1:9002) - Mysql client for developer
+ - [http://127.0.0.1:9003](http://127.0.0.1:9003) - Redis client for developer
 
 
 ## Helpers for developer
