@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  php:
+    env_file:
+      - ./.env
+      - ./test/.env
+  nginx:
+    env_file:
+      - ./.env
+      - ./test/.env
+  php_worker:
+    container_name: ${COMPOSE_PROJECT_NAME}_php_worker
+    restart: always
+    image: ${CI_REGISTRY_IMAGE}/final/php:${CI_COMMIT_REF_SLUG}
+    command: "/opt/wait-for-it.sh ${MYSQL_HOST}:${MYSQL_PORT} -- /opt/worker.sh"
+    env_file:
+      - ./.env
+      - ./test/.env
+  cron:
+    container_name: ${COMPOSE_PROJECT_NAME}_cron
+    restart: always
+    image: ${CI_REGISTRY_IMAGE}/final/cron:${CI_COMMIT_REF_SLUG}
+    network_mode: host

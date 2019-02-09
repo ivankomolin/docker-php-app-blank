@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  php:
+    env_file:
+      - ./.env
+      - ./production/.env
+  nginx:
+    env_file:
+      - ./.env
+      - ./production/.env
+  php_worker1:
+    container_name: ${COMPOSE_PROJECT_NAME}_php_worker1
+    restart: always
+    image: ${CI_REGISTRY_IMAGE}/final/php:${CI_COMMIT_REF_SLUG}
+    command: "/opt/wait-for-it.sh ${MYSQL_HOST}:${MYSQL_PORT} -- /opt/worker.sh"
+    env_file:
+      - ./.env
+      - ./production/.env
+  php_worker2:
+    container_name: ${COMPOSE_PROJECT_NAME}_php_worker2
+    restart: always
+    image: ${CI_REGISTRY_IMAGE}/final/php:${CI_COMMIT_REF_SLUG}
+    command: "/opt/wait-for-it.sh ${MYSQL_HOST}:${MYSQL_PORT} -- /opt/worker.sh"
+    env_file:
+      - ./.env
+      - ./production/.env
+  php_worker3:
+    container_name: ${COMPOSE_PROJECT_NAME}_php_worker3
+    restart: always
+    image: ${CI_REGISTRY_IMAGE}/final/php:${CI_COMMIT_REF_SLUG}
+    command: "/opt/wait-for-it.sh ${MYSQL_HOST}:${MYSQL_PORT} -- /opt/worker.sh"
+    env_file:
+      - ./.env
+      - ./production/.env
+  cron:
+    container_name: ${COMPOSE_PROJECT_NAME}_cron
+    restart: always
+    image: ${CI_REGISTRY_IMAGE}/final/cron:${CI_COMMIT_REF_SLUG}
+    network_mode: host

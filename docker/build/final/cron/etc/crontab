@@ -1,0 +1,3 @@
+#crontab running scripts into exist containers
+*	*	*	*	*	docker exec -u www-data:www-data php php -v
+
