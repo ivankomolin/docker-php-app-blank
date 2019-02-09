@@ -23,11 +23,11 @@ After installation are available web applications:
 Runing php worker
 
 ```
-$ make php_worker
+$ make php-worker
 ```
 
 Login to php container
 
 ```
-$ make php_login
+$ make php-login
 ```
