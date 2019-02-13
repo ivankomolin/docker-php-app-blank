@@ -24,5 +24,3 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_nginx
     restart: always
     image: ${CI_REGISTRY_IMAGE}/final/nginx:${CI_COMMIT_REF_SLUG}
-    ports:
-      - 80:80
