@@ -1,14 +1,22 @@
 version: '3.4'
 
 services:
+  traefik:
+    image: traefik
+    command: --api --docker --docker.exposedbydefault=false
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   nginx:
     env_file:
       - ./.env
       - ./local/.env
     volumes:
       - ../../app/public/:/var/www/html/public/
-    ports:
-      - 127.0.0.2:9001:80
+    labels:
+      - "traefik.enable=true"
   php:
     env_file:
       - ./.env
@@ -42,8 +50,8 @@ services:
       - PMA_PORT=${MYSQL_PORT}
     depends_on:
       - mysql
-    ports:
-      - 127.0.0.2:9002:80
+    labels:
+      - "traefik.enable=true"
   redis-commander:
     container_name: ${COMPOSE_PROJECT_NAME}_rc
     restart: always
@@ -52,5 +60,5 @@ services:
       - redis
     environment:
       - REDIS_HOSTS=local:${REDIS_HOST}:${REDIS_PORT}
-    ports:
-      - 127.0.0.2:9003:8081
+    labels:
+      - "traefik.enable=true"
