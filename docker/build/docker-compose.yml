@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  php:
+    build:
+      context: ../../
+      dockerfile: docker/build/php/Dockerfile
+    image: ${CI_REGISTRY_IMAGE}/php:${CI_COMMIT_REF_SLUG}
+  nginx:
+    build:
+      context: ../../
+      dockerfile: docker/build/nginx/Dockerfile
+    image: ${CI_REGISTRY_IMAGE}/nginx:${CI_COMMIT_REF_SLUG}
+  mysql:
+    build: mysql
+    image: ${CI_REGISTRY_IMAGE}/mysql:${CI_COMMIT_REF_SLUG}
+  redis:
+    build: redis
+    image: ${CI_REGISTRY_IMAGE}/redis:${CI_COMMIT_REF_SLUG}

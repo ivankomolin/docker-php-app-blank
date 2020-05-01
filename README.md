@@ -1,33 +1,57 @@
-## Install by local machine 
+## Пример docker окружения для web приложения(nginx,php-fpm,mysql,redis)
 
-Requirements:
+1. Установить зависимости:  
  - Docker v18.09+
  - Docker-compose v1.23+
- - Git
- - Make
+ - Git  
+ - Make  
 
-Run these commands in an empty working directory
+2. Клонировать репозиторий:  
 ```
 $ git clone https://github.com/ivankomolin/docker-php-app-blank ./
-$ make install
 ```
 
-After installation are available web applications:  
- - [http://127.0.0.1:9001](http://127.0.0.1:9001) - App
- - [http://127.0.0.1:9002](http://127.0.0.1:9002) - Mysql client for developer
- - [http://127.0.0.1:9003](http://127.0.0.1:9003) - Redis client for developer
-
-
-## Helpers for developer
-
-Runing php worker
-
+3. Указать свободный порт* в системе и домен, по которому будут отвечать сервисы:  
 ```
-$ make php-worker
+Переменная FREE_PORT и DOMAIN в файле docker/.env
 ```
 
-Login to php container
+`Не обязательно, если свободен 80 порт, он используется по умолчанию`
 
+4. Собрать образы и запустить сервисы:  
 ```
-$ make php-login
+$ make build
+$ make up
 ```
+
+5. Добавить записи с адресами сервисов в /etc/hosts:  
+```
+$ sudo make hosts
+```
+
+`Не обязательно, можно обращаться по ip, см: docker/development/docker-compose.yml`
+
+### Результат  
+
+После успешного запуска будут доступны следующие сервисы:  
+ - http://example.local - Web сервер, который смотрит в директорию src
+ - http://pma.example.local - GUI mysql  
+ - http://rc.example.local - GUI redis
+
+`Если FREE_PORT отличен от 80, то необходимо указывать порт через ":", например: http://example.local:1010`
+
+### Херперы для работы  
+
+Просмотр логов контейнера:  
+make log-{service}, например:  
+```
+$ make log-mysql
+```
+
+Вход в контейнер:  
+make bash-{service}, например:  
+```
+$ make bash-php
+```
+
+Остальные команды можно посмотреть здесь: [docker/development/Makefile](./docker/development/Makefile)

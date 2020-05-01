@@ -7,4 +7,4 @@ services:
       - ./.env
   nginx:
     ports:
-      - 9002:80
+      - 9001:80
