@@ -8,7 +8,7 @@
 
 2. Клонировать репозиторий:  
 ```
-$ git clone https://github.com/ivankomolin/docker-php-app-blank ./
+$ git clone git@github.com:ivankomolin/docker-php-app-blank.git ./
 ```
 
 3. Указать свободный порт* в системе и домен, по которому будут отвечать сервисы:  
